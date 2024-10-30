@@ -1,0 +1,477 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.8em;
+    margin-bottom: 0.2em;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #ffd700;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 4em 2em;
+    background: linear-gradient(135deg, #333, #444);
+    color: #fff;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Seção de Login */
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 2em auto;
+    width: 90%;
+}
+
+.login h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+.login form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login label {
+    font-size: 1em;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.login input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.login input:focus {
+    border-color: #555;
+}
+
+/* Botões */
+button {
+    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    color: #fff;
+    padding: 12px 20px; /* Aumentando o padding */
+    border: none;
+    border-radius: 25px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transições */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+button:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Levanta o botão */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
+
+
+.login p {
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.login a {
+    color: #333;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login a:hover {
+    color: #555;
+}
+
+/* Seção do Carrinho */
+.cart {
+    padding: 2em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2em auto;
+}
+
+.cart h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f2f2f2; /* Efeito hover na linha */
+}
+
+.total {
+    font-size: 1.2em;
+    text-align: right;
+    margin-top: 1em;
+}
+
+/* Seção de Produtos */
+.products {
+    padding: 3em 1em;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.products h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5em;
+}
+
+.product {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1em;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.product h3 {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    color: #333;
+}
+
+.product p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+/* Seção de Registro */
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 2em auto;
+    width: 90%;
+}
+
+.register h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+.register form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.register label {
+    font-size: 1em;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.register input {
+    padding: 12px; /* Aumentando o padding */
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.register input:focus {
+    border-color: #555; /* Contorno ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
+}
+
+
+/* Seção de Checkout */
+.checkout {
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2em auto;
+    width: 90%;
+}
+
+.checkout h2 {
+    margin-bottom: 1em;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5em; /* Espaçamento entre os campos */
+}
+
+.checkout label {
+    margin: 10px 0 5px;
+    display: block;
+    font-weight: bold; /* Aumenta o destaque do rótulo */
+}
+
+.checkout input, 
+.checkout select {
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Faz com que o input ocupe toda a largura disponível */
+    transition: border-color 0.3s ease;
+}
+
+.checkout input:focus, 
+.checkout select:focus {
+    border-color: #555; /* Contorno ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
+}
+
+.checkout-button {
+    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    color: #fff;
+    padding: 12px 20px; /* Aumentando o padding */
+    border: none;
+    border-radius: 25px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* Para funcionar como um botão */
+    margin-top: 1em;
+    width: 100%; /* Faz com que o botão ocupe toda a largura do formulário */
+}
+
+.checkout-button:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Levanta o botão */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
+
+/* Seção de Not Found */
+.not-found {
+    padding: 3em 1em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 3em auto;
+    text-align: center; /* Centraliza o texto */
+}
+
+.not-found h2 {
+    font-size: 2.5em;
+    color: #e74c3c; /* Cor de alerta */
+    margin-bottom: 0.5em;
+}
+
+.not-found p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    color: #555;
+}
+
+.back-button {
+    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    color: #fff;
+    padding: 12px 20px; /* Aumentando o padding */
+    border: none;
+    border-radius: 25px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* Para funcionar como um botão */
+    text-decoration: none; /* Remove sublinhado */
+    margin-top: 1em;
+}
+
+.back-button:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Levanta o botão */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
+
+/* Seção de Detalhes do Produto */
+.product-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2em auto;
+    max-width: 800px; /* Largura máxima */
+}
+
+.product-image img {
+    max-width: 100%; /* Imagem responsiva */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+.details {
+    padding: 1em;
+    max-width: 400px; /* Largura máxima para detalhes */
+    text-align: left; /* Alinhamento à esquerda para texto */
+}
+
+.details h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+.details p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.add-to-cart {
+    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    color: #fff;
+    padding: 12px 20px; /* Aumentando o padding */
+    border: none;
+    border-radius: 25px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Levanta o botão */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #ffd700;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
