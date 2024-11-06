@@ -483,7 +483,9 @@ tr:hover {
     outline: none; /* Remove o contorno padrão do navegador */
 }
 
+/* Estilos do botão de checkout */
 .checkout-button {
+    margin-top: 10px;
     background: linear-gradient(135deg, #333, #555); /* Gradiente */
     color: #fff;
     padding: 12px 20px; /* Aumentando o padding */
@@ -491,17 +493,21 @@ tr:hover {
     border-radius: 25px; /* Bordas mais arredondadas */
     cursor: pointer;
     font-size: 1em;
+    text-align: center; /* Alinha o texto ao centro */
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Garante que o link se comporte como um botão */
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    display: inline-block; /* Para funcionar como um botão */
-    margin-top: 1em;
-    width: 100%; /* Faz com que o botão ocupe toda a largura do formulário */
+    width: 100%; /* O botão ocupa a largura total do elemento pai */
+    box-sizing: border-box; /* Inclui o padding na largura total */
 }
 
 .checkout-button:hover {
+    
     background-color: #555; /* Cor ao passar o mouse */
     transform: translateY(-2px); /* Levanta o botão */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
 }
+
 
 /* Seção de Not Found */
 .not-found {
@@ -753,7 +759,6 @@ select option[selected] {
 /* Wrapper para o conteúdo principal */
 main {
     flex: 1; /* Faz o main expandir para ocupar o espaço disponível */
-    
 }
 
 
