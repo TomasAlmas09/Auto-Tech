@@ -753,7 +753,7 @@ select option[selected] {
 /* Wrapper para o conteúdo principal */
 main {
     flex: 1; /* Faz o main expandir para ocupar o espaço disponível */
-    padding: 20px; /* Espaçamento interno */
+    
 }
 
 
