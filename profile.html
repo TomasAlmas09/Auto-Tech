@@ -1,34 +1,143 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Tech - Perfil</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Auto Tech - Perfil</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="shortcut icon" href="assets/images/logo_auto-tech_mini.png" type="image/x-icon">
+    </head>
     <header>
-        <h1>Auto Tech</h1>
+        <img src="assets/images/logo_auto-tech_white.png" alt="Logo Auto Tech" class="logo">
         <nav>
-            <a href="index.html">Home</a>
-            <a href="cart.html">Carrinho</a>
-            <a href="profile.html">Perfil</a>
-            <a href="login.html">Login</a>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Perfil</a>
+            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
         </nav>
     </header>
+<body>
 
     <section class="profile">
         <h2>Perfil</h2>
         <form action="#">
+    
+            <!-- Foto de perfil -->
+            <div class="profile-pic">
+                <img src="assets/images/perfil.webp" alt="Foto de Perfil" id="profile-img">
+                <label for="upload-photo" class="upload-btn">Alterar Foto</label>
+                <input type="file" id="upload-photo" accept="image/*" hidden>
+            </div>
+    
+            <!-- Informações do perfil -->
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" value="Nome do utilizador" required>
 
+            <!-- Informações do perfil -->
+            <label for="nome">Telefone:</label>
+            <input type="text" id="phone" name="phone" value="+351 961 536 768" required>
+    
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="usuario@exemplo.com" required>
+            <input type="email" id="email" name="email" value="utilizador@exemplo.com" required>
+    
+            <!-- Morada de residência -->
+            <fieldset>
+                <legend>Morada</legend>
+                <label for="rua">Rua:</label>
+                <input type="text" id="rua" name="rua" value="Rua do utilizador" required>
+    
+                <label for="numero">Porta:</label>
+                <input type="text" id="numero" name="numero" value="Número do lote" required>
+    
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" value="Cidade do utilizador" required>
+    
+                <label for="codigo-postal">Código Postal:</label>
+                <input type="text" id="codigo-postal" name="codigo-postal" value="Código postal" required>
+    
+                <label for="country">País:</label>
+<select id="country" name="country">
+    <option value="austria">Áustria</option>
+    <option value="belgium">Bélgica</option>
+    <option value="bulgaria">Bulgária</option>
+    <option value="croatia">Croácia</option>
+    <option value="cyprus">Chipre</option>
+    <option value="czech_republic">República Tcheca</option>
+    <option value="denmark">Dinamarca</option>
+    <option value="estonia">Estônia</option>
+    <option value="finland">Finlândia</option>
+    <option value="france">França</option>
+    <option value="germany">Alemanha</option>
+    <option value="greece">Grécia</option>
+    <option value="hungary">Hungria</option>
+    <option value="ireland">Irlanda</option>
+    <option value="italy">Itália</option>
+    <option value="latvia">Letônia</option>
+    <option value="lithuania">Lituânia</option>
+    <option value="luxembourg">Luxemburgo</option>
+    <option value="malta">Malta</option>
+    <option value="netherlands">Países Baixos</option>
+    <option value="poland">Polônia</option>
+    <option value="portugal" selected>Portugal</option>
+    <option value="romania">Romênia</option>
+    <option value="slovakia">Eslováquia</option>
+    <option value="slovenia">Eslovênia</option>
+    <option value="spain">Espanha</option>
+    <option value="sweden">Suécia</option>
+</select>
 
-            <label for="endereco">Morada:</label>
-            <input type="text" id="morada" name="morada" value="Morada do utilizador" required>
+            </fieldset>
+    
+            <!-- Morada de faturação -->
+            <fieldset>
+                <legend>Morada de Faturação</legend>
+                <label for="rua-faturacao">Rua:</label>
+                <input type="text" id="rua-faturacao" name="rua-faturacao" value="Rua de faturação" required>
+    
+                <label for="numero-faturacao">Porta:</label>
+                <input type="text" id="numero-faturacao" name="numero-faturacao" value="Número do Lote" required>
+    
+                <label for="cidade-faturacao">Cidade:</label>
+                <input type="text" id="cidade-faturacao" name="cidade-faturacao" value="Cidade de faturação" required>
+    
+                <label for="codigo-postal-faturacao">Código Postal:</label>
+                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao" value="Código postal de faturação" required>
+    
+                <label for="pais-faturacao">País:</label>
+<select id="pais-faturacao" name="pais-faturacao">
+    <option value="austria">Áustria</option>
+    <option value="belgium">Bélgica</option>
+    <option value="bulgaria">Bulgária</option>
+    <option value="croatia">Croácia</option>
+    <option value="cyprus">Chipre</option>
+    <option value="czech_republic">República Tcheca</option>
+    <option value="denmark">Dinamarca</option>
+    <option value="estonia">Estônia</option>
+    <option value="finland">Finlândia</option>
+    <option value="france">França</option>
+    <option value="germany">Alemanha</option>
+    <option value="greece">Grécia</option>
+    <option value="hungary">Hungria</option>
+    <option value="ireland">Irlanda</option>
+    <option value="italy">Itália</option>
+    <option value="latvia">Letônia</option>
+    <option value="lithuania">Lituânia</option>
+    <option value="luxembourg">Luxemburgo</option>
+    <option value="malta">Malta</option>
+    <option value="netherlands">Países Baixos</option>
+    <option value="poland">Polônia</option>
+    <option value="portugal" selected>Portugal</option>
+    <option value="romania">Romênia</option>
+    <option value="slovakia">Eslováquia</option>
+    <option value="slovenia">Eslovênia</option>
+    <option value="spain">Espanha</option>
+    <option value="sweden">Suécia</option>
+</select>
 
+            </fieldset>
+    
+            <!-- Botão de atualização -->
             <button type="submit">Atualizar Perfil</button>
         </form>
     </section>
