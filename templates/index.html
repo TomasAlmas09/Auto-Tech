@@ -37,12 +37,14 @@
         <h3>Produtos em Destaque</h3>
         <div class="product-list">
             {% for produto in produtos %}
+            <a href="{{ url_for('produto', nome=produto.nome) }}">
             <div class="product">
                 <img src="{{ url_for('static', filename='images/' + produto.nome + '.png') }}" alt="{{ produto.nome }}">
                 <h4>{{ produto.nome }}</h4>
                 <p>{{ produto.preco }}€</p>
                 <a class="btn" href="{{ url_for('produto', nome=produto.nome) }}">Ver Produto</a>
             </div>
+        </a>
             {% endfor %}
         </div>
     </section>

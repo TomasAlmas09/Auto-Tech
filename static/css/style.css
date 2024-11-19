@@ -258,6 +258,10 @@ header nav a:hover {
     border-color: #555;
 }
 
+.checked {
+    color: orange;
+  }
+
 /* Botões */
 button {
     background: linear-gradient(135deg, #333, #555); /* Gradiente */
@@ -358,6 +362,27 @@ tr:hover {
     margin-top: 1em;
 }
 
+    /* Estilo para as animações */
+    .animated {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+    }
+
+    .fadeInUp {
+        animation-name: fadeInUp;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
 /* Seção de Produtos */
 .products {
     padding: 3em 1em;
@@ -365,12 +390,14 @@ tr:hover {
     background-color: #f9f9f9;
 }
 
+/* Título da seção de produtos */
 .products h2 {
     font-size: 2em;
     margin-bottom: 0.5em;
     color: #333;
 }
 
+/* Lista de produtos */
 .product-list {
     display: flex;
     justify-content: space-around;
@@ -378,6 +405,7 @@ tr:hover {
     gap: 1.5em;
 }
 
+/* Estilo de cada produto */
 .product {
     background: #fff;
     border: 1px solid #ddd;
@@ -390,11 +418,13 @@ tr:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Efeito de hover sobre o produto */
 .product:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Imagem do produto */
 .product img {
     max-width: 100%;
     height: auto;
@@ -402,17 +432,215 @@ tr:hover {
     margin-bottom: 1em;
 }
 
+/* Título do produto (h3) */
 .product h3 {
     font-size: 1.1em;
     margin: 0.5em 0;
     color: #333;
 }
 
+/* Parágrafo de descrição do produto */
 .product p {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 1em;
 }
+
+/* Garantindo que textos não fiquem com estilo de link */
+.product h3, .product p {
+    text-decoration: none;  /* Remover sublinhado */
+    color: inherit;         /* Garantir que herdem a cor do elemento pai */
+}
+
+/* Seção de Produtos */
+.products {
+    padding: 3em 1em;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/* Título da seção de produtos */
+.products h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+/* Lista de produtos */
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5em;
+}
+
+/* Estilo de cada produto */
+.product {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1em;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de hover sobre o produto */
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagem do produto */
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+/* Título do produto (h3) */
+.product h3 {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    color: #333;
+}
+
+/* Parágrafo de descrição do produto */
+.product p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+/* Garantindo que textos não fiquem com estilo de link */
+.product h3, .product p {
+    text-decoration: none;  /* Remover sublinhado */
+    color: inherit;         /* Garantir que herdem a cor do elemento pai */
+}
+
+/* Caso exista algum link dentro do produto (por exemplo, em 'a') */
+.product a {
+    text-decoration: none;  /* Remover sublinhado dos links */
+    color: inherit;    /* Garantir que a cor dos links seja a mesma que o texto */
+}
+
+.product .btn {
+    text-decoration: none;  /* Remover sublinhado dos links */
+    color: white !important; 
+}
+
+
+/* Container do produto - Ajustando largura e alinhamento à esquerda */
+.product-detail {
+    display: flex;
+    justify-content: flex-start !important; /* Alinha os itens à esquerda */
+    align-items: flex-start;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2em auto;
+    max-width: 1000px !important; /* Largura máxima do container */
+    width: 100% !important; /* Largura responsiva */
+    position: flex; /* Corrige posição */
+    overflow: hidden;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .product-detail {
+        max-width: 100%;
+        width: 100%;
+        padding: 1em;
+    }
+}
+
+/* Ajuste da imagem do produto */
+.product-image {
+    width: 50%;
+    margin-right: 50px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+/* Detalhes do produto - Alinhamento à esquerda */
+.details {
+    padding: 1em;
+    max-width: 500px;
+    text-align: left; /* Garantindo que o texto dentro de .details esteja alinhado à esquerda */
+    z-index: 1;
+}
+
+/* Nome do produto */
+.product-name {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Avaliação do produto */
+.rating {
+    margin: 10px 0;
+}
+
+.checked {
+    color: #FFD700;
+}
+
+/* Botão para adicionar ao carrinho */
+.add-to-cart {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+/* Seção de quantidade */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-selector button {
+    font-size: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.quantity-selector input {
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Alerta de estoque */
+.stock-warning {
+    color: red !important;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 
 /* Seção de Registro */
 .register {

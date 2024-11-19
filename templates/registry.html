@@ -1,11 +1,10 @@
 {% extends 'core/base.html' %}
 
-<body>
-    {% block main %}
-    <main>
+{% block main %}
+<main>
     <section class="register">
         <h2>Registar</h2>
-        <form action="#">
+        <form action="{{ url_for('registo') }}" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -22,6 +21,4 @@
         </form>
     </section>
 </main>
-{% endblock%}
-</body>
-</html>
+{% endblock %}
