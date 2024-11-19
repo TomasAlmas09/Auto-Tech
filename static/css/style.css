@@ -151,18 +151,19 @@ header nav a:hover {
     padding: 12px 30px;
     font-size: 1em;
     border-radius: 25px;
-    text-decoration: none;
+    text-decoration: none;  /* Já está sendo aplicado */
     transition: transform 0.3s ease, background-color 0.3s ease;
     display: inline-block;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
 }
+
 
 .content .btn:hover {
     background-color: #b80000;
     transform: scale(1.05); /* Aumenta o botão levemente ao passar o mouse */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -271,6 +272,26 @@ button {
 }
 
 button:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Levanta o botão */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
+
+/* Botões */
+.btn {
+    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    color: #fff;
+    padding: 12px 20px; /* Aumentando o padding */
+    border: none;
+    border-radius: 25px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transições */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    text-decoration: none;  /* Já está sendo aplicado */
+}
+
+.btn:hover {
     background-color: #555; /* Cor ao passar o mouse */
     transform: translateY(-2px); /* Levanta o botão */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */

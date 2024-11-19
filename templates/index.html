@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block wrapper %}
+{% block main %}
 <main>
     <section class="hero">
         <div class="slider">
@@ -36,36 +36,14 @@
     <section class="products">
         <h3>Produtos em Destaque</h3>
         <div class="product-list">
+            {% for produto in produtos %}
             <div class="product">
-                <img src="{{ url_for('static', filename='images/jantes.webp') }}" alt="Jantes Desportivas">
-                <h4>Jantes Desportivas</h4>
-                <p>Preço: 300€</p>
-                <button>Ver Produto</button>
+                <img src="{{ url_for('static', filename='images/' + produto.nome + '.png') }}" alt="{{ produto.nome }}">
+                <h4>{{ produto.nome }}</h4>
+                <p>{{ produto.preco }}€</p>
+                <a class="btn" href="{{ url_for('produto', nome=produto.nome) }}">Ver Produto</a>
             </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='images/spoiler.webp') }}" alt="Spoiler Traseiro">
-                <h4>Spoiler Traseiro</h4>
-                <p>Preço: 150€</p>
-                <button>Ver Produto</button>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='images/coilovers.webp') }}" alt="Coilovers">
-                <h4>Coilovers</h4>
-                <p>Preço: 400€</p>
-                <button>Ver Produto</button>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='images/front-lip.avif') }}" alt="Front Lip">
-                <h4>Front Lip</h4>
-                <p>Preço: 100€</p>
-                <button>Ver Produto</button>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='images/grelha-frontal.jpg') }}" alt="Grelha Frontal">
-                <h4>Grelha Frontal</h4>
-                <p>Preço: 250€</p>
-                <button>Ver Produto</button>
-            </div>
+            {% endfor %}
         </div>
     </section>
 </main>
