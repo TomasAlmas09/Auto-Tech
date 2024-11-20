@@ -58,7 +58,7 @@ def load_user(user_id):
 @app.route('/')
 def index():
     produtos = Produto.query.all()
-    return render_template('index.html', produtos=produtos)
+    return render_template('index.html', name="Produtos Automotivos",produtos=produtos)
 
 @app.route('/produtos/<string:nome>')
 def produto(nome):

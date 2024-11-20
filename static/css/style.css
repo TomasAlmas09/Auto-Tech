@@ -1035,3 +1035,63 @@ footer a {
 footer a:hover {
     color: #fff;
 }
+
+/* Trustbar Container */
+.trustbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #333, #555);
+    padding: 20px 20px; /* Reduzido */
+    color: #fff;
+    flex-wrap: wrap;
+    gap: 20px; /* Menor espaçamento */
+}
+
+/* Individual Trust Item */
+.trust-item {
+    flex: 1 1 150px; /* Reduzido */
+    max-width: 200px; /* Reduzido */
+    text-align: center;
+    padding: 10px; /* Menor padding */
+    border-radius: 8px; /* Leve ajuste */
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.trust-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Icon Container */
+.icon-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px; /* Menor tamanho */
+    height: 60px; /* Menor tamanho */
+    margin: 0 auto 10px; /* Menor margem */
+    background-color: #fff;
+    color: #333;
+    border-radius: 50%;
+    font-size: 28px; /* Menor fonte */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Trust Item Title */
+.trust-item h3 {
+    font-size: 16px; /* Menor fonte */
+    margin-bottom: 8px; /* Menor margem */
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Trust Item Text */
+.trust-item p {
+    font-size: 14px; /* Menor fonte */
+    line-height: 1.4; /* Ajuste na altura da linha */
+    color: #e0e0e0;
+}
