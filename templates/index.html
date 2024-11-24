@@ -2,9 +2,11 @@
 
 {% block main %}
 <main>
+    <!-- Seção de destaque (banners) -->
     <section class="hero">
         <div class="slider">
             <div class="slides">
+                <!-- Slide 1 -->
                 <div class="slide">
                     <img src="{{ url_for('static', filename='images/banner1.png') }}" alt="Promoção de Natal">
                     <div class="content">
@@ -13,6 +15,7 @@
                         <a href="#" class="btn">Saiba Mais</a>
                     </div>
                 </div>
+                <!-- Slide 2 -->
                 <div class="slide">
                     <img src="{{ url_for('static', filename='images/banner2.png') }}" alt="Ofertas Exclusivas">
                     <div class="content">
@@ -21,6 +24,7 @@
                         <a href="#" class="btn">Ver mais</a>
                     </div>
                 </div>
+                <!-- Slide 3 -->
                 <div class="slide">
                     <img src="{{ url_for('static', filename='images/banner3.png') }}" alt="Novidades na loja">
                     <div class="content">
@@ -33,6 +37,7 @@
         </div>
     </section>
 
+    <!-- Seção de confiança (benefícios) -->
     <section class="trustbar">
         <div class="trust-item">
             <div class="icon-container">
@@ -64,42 +69,45 @@
         </div>
     </section>
 
+    <!-- Seção de produtos em destaque -->
     <section class="products">
         <h3>Produtos em Destaque</h3>
         <div class="product-list">
             {% for produto in produtos %}
             <a href="{{ url_for('produto', nome=produto.nome) }}">
-            <div class="product">
-                <img src="{{ url_for('static', filename='images/' + produto.nome + '.png') }}" alt="{{ produto.nome }}">
-                <h4>{{ produto.nome }}</h4>
-                <p>{{ produto.preco }}€</p>
-                <a class="btn" href="{{ url_for('produto', nome=produto.nome) }}">Ver Produto</a>
-            </div>
-        </a>
+                <div class="product">
+                    <img src="{{ url_for('static', filename='images/' + produto.nome + '.png') }}" alt="{{ produto.nome }}">
+                    <h4>{{ produto.nome }}</h4>
+                    <p>{{ produto.preco }}€</p>
+                    <a class="btn" href="{{ url_for('produto', nome=produto.nome) }}">Ver Produto</a>
+                </div>
+            </a>
             {% endfor %}
         </div>
     </section>
 </main>
-
 {% endblock %}
 
 {% block scripts %}
 <script>
+    // Gerenciamento do carrossel de slides
     document.addEventListener('DOMContentLoaded', () => {
-        let slideIndex = 0;
+        let slideIndex = 0; // Índice do slide atual
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        let slideInterval = setInterval(() => moveSlide(1), 5000);
+        let slideInterval = setInterval(() => moveSlide(1), 5000); // Mudança automática a cada 5s
 
+        // Move os slides para frente ou para trás
         function moveSlide(step) {
-            clearInterval(slideInterval); // Clear interval to stop auto-slide temporarily
+            clearInterval(slideInterval); // Pausa a mudança automática
             slideIndex += step;
-            if (slideIndex < 0) slideIndex = totalSlides - 1;
-            else if (slideIndex >= totalSlides) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = totalSlides - 1; // Volta ao último slide
+            else if (slideIndex >= totalSlides) slideIndex = 0; // Volta ao primeiro slide
             updateSlider();
-            slideInterval = setInterval(() => moveSlide(1), 5000); // Restart auto-slide
+            slideInterval = setInterval(() => moveSlide(1), 5000); // Reinicia a mudança automática
         }
 
+        // Atualiza o carrossel com base no índice do slide atual
         function updateSlider() {
             const slideWidth = slides[0].clientWidth;
             document.querySelector('.slides').style.transform = `translateX(${-slideWidth * slideIndex}px)`;

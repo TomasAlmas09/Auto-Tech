@@ -34,15 +34,3 @@
 </main>
 {% endblock %}
 
-{% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const removeButtons = document.querySelectorAll('.remove-button');
-        removeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                alert('Produto removido do carrinho!');
-            });
-        });
-    });
-</script>
-{% endblock %}

@@ -2,69 +2,141 @@
 
 {% block main %}
 <main>
+    <!-- Seção de registro de usuário -->
     <section class="register">
         <h2>Registar</h2>
-        <form action="{{ url_for('registo') }}" method="POST">
+
+        <!-- Formulário de registro -->
+        <form action="{{ url_for('registo') }}" method="POST" enctype="multipart/form-data">
+            
+            <!-- Campo de Nome -->
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
+            <!-- Campo de Email -->
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
+            <!-- Campo de Senha -->
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
 
+            <!-- Campo para Confirmar Senha -->
             <label for="confirmar-senha">Confirmar Senha:</label>
             <input type="password" id="confirmar-senha" name="confirmar-senha" required>
 
+            <!-- Campo de Telefone -->
             <label for="phone">Telefone:</label>
             <input type="text" id="phone" name="phone" required>
 
+            <!-- Campo para Imagem de Perfil -->
+            <label for="imagem">Imagem de Perfil:</label>
+            <input type="file" id="imagem" name="imagem">
+
+            <!-- Seção para informações de morada -->
             <fieldset>
                 <legend>Morada</legend>
+
+                <!-- Campo de Rua -->
                 <label for="rua">Rua:</label>
                 <input type="text" id="rua" name="rua" required>
 
+                <!-- Campo de Número da Porta -->
                 <label for="numero">Porta:</label>
                 <input type="text" id="numero" name="numero" required>
 
+                <!-- Campo de Cidade -->
                 <label for="cidade">Cidade:</label>
                 <input type="text" id="cidade" name="cidade" required>
 
+                <!-- Campo de Código Postal -->
                 <label for="codigo-postal">Código Postal:</label>
                 <input type="text" id="codigo-postal" name="codigo_postal" required>
 
+                <!-- Campo para selecionar País -->
                 <label for="country">País:</label>
                 <select id="country" name="country">
-                    <option value="portugal">Portugal</option>
-                    <!-- Outras opções de países -->
+                    <!-- Loop para listar países por continente -->
+                    {% for continente, paises in paises_por_continente.items() %}
+                        <optgroup label="{{ continente }}">
+                            {% for pais in paises %}
+                                <option value="{{ pais }}" {% if pais == "Portugal" %}selected{% endif %}>{{ pais }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
                 </select>
             </fieldset>
 
-            <fieldset>
+            <!-- Checkbox para escolher se a morada de faturação é a mesma -->
+            <label>
+                <input type="checkbox" id="mesma-morada" name="mesma-morada" checked>
+                Usar a mesma morada para faturação
+            </label>
+
+            <!-- Seção para morada de faturação -->
+            <fieldset id="morada-faturacao" style="display: none;">
                 <legend>Morada de Faturação</legend>
+
+                <!-- Campo de Rua para faturação -->
                 <label for="rua-faturacao">Rua:</label>
-                <input type="text" id="rua-faturacao" name="rua-faturacao" required>
+                <input type="text" id="rua-faturacao" name="rua-faturacao">
 
+                <!-- Campo de Número da Porta para faturação -->
                 <label for="numero-faturacao">Porta:</label>
-                <input type="text" id="numero-faturacao" name="numero-faturacao" required>
+                <input type="text" id="numero-faturacao" name="numero-faturacao">
 
+                <!-- Campo de Cidade para faturação -->
                 <label for="cidade-faturacao">Cidade:</label>
-                <input type="text" id="cidade-faturacao" name="cidade-faturacao" required>
+                <input type="text" id="cidade-faturacao" name="cidade-faturacao">
 
+                <!-- Campo de Código Postal para faturação -->
                 <label for="codigo-postal-faturacao">Código Postal:</label>
-                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao" required>
+                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao">
 
+                <!-- Campo para selecionar País para faturação -->
                 <label for="pais-faturacao">País:</label>
                 <select id="pais-faturacao" name="pais-faturacao">
-                    <option value="portugal">Portugal</option>
-                    <!-- Outras opções de países -->
+                    <!-- Loop para listar países por continente -->
+                    {% for continente, paises in paises_por_continente.items() %}
+                        <optgroup label="{{ continente }}">
+                            {% for pais in paises %}
+                                <option value="{{ pais }}" {% if pais == "Portugal" %}selected{% endif %}>{{ pais }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
                 </select>
             </fieldset>
 
+            <!-- Botão para submeter o formulário -->
             <button type="submit">Registar</button>
         </form>
+
+        <!-- Link para login caso o usuário já tenha conta -->
         <p>Já tens uma conta? <a href="{{ url_for('login') }}">Faz login aqui</a>.</p>
     </section>
+
+    <!-- Script para exibir/ocultar a morada de faturação -->
+    <script>
+        // Obter referência ao checkbox e à seção de faturação
+        const checkbox = document.getElementById('mesma-morada');
+        const faturacaoFieldset = document.getElementById('morada-faturacao');
+
+        // Função para mostrar ou esconder a morada de faturação
+        function toggleFaturacaoForm() {
+            if (checkbox.checked) {
+                faturacaoFieldset.style.display = 'none'; // Esconder
+                // Limpar os valores do formulário de faturação quando está escondido
+                document.querySelectorAll('#morada-faturacao input, #morada-faturacao select').forEach(field => field.value = '');
+            } else {
+                faturacaoFieldset.style.display = 'block'; // Mostrar
+            }
+        }
+
+        // Adiciona evento ao checkbox
+        checkbox.addEventListener('change', toggleFaturacaoForm);
+
+        // Inicializa o estado do formulário ao carregar a página
+        toggleFaturacaoForm();
+    </script>
 </main>
 {% endblock %}
