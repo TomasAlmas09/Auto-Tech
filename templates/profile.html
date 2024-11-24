@@ -3,45 +3,45 @@
 {% block main %}
 <main>
     <section class="profile">
-        <h2>{{ola.nome}}</h2>
+        <h2>{{ user.nome }}</h2>
         <form method="POST" action="">
     
             <!-- Foto de perfil -->
             <div class="profile-pic">
-                <img src="{{ url_for('static', filename='images/perfil.webp') }}" alt="Foto de Perfil" id="profile-img">
+                <img src="{{ user.foto_perfil_url or url_for('static', filename='images/perfil.webp') }}" alt="Foto de Perfil" id="profile-img">
                 <label for="upload-photo" class="upload-btn">Alterar Foto</label>
                 <input type="file" id="upload-photo" name="foto_perfil" accept="image/*" hidden>
             </div>
     
             <!-- Informações do perfil -->
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" value="" required>
+            <input type="text" id="nome" name="nome" value="{{ user.nome }}" required>
 
             <!-- Informações do perfil -->
             <label for="phone">Telefone:</label>
-            <input type="text" id="phone" name="phone" value="" required>
+            <input type="text" id="phone" name="phone" value="{{ user.phone }}" required>
     
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="" required>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
     
             <!-- Morada de residência -->
             <fieldset>
                 <legend>Morada</legend>
                 <label for="rua">Rua:</label>
-                <input type="text" id="rua" name="rua" value="" required>
+                <input type="text" id="rua" name="rua" value="{{ user.rua }}" required>
     
                 <label for="numero">Porta:</label>
-                <input type="text" id="numero" name="numero" value="" required>
+                <input type="text" id="numero" name="numero" value="{{ user.numero }}" required>
     
                 <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade" value="" required>
+                <input type="text" id="cidade" name="cidade" value="{{ user.cidade }}" required>
     
                 <label for="codigo-postal">Código Postal:</label>
-                <input type="text" id="codigo-postal" name="codigo_postal" value="" required>
+                <input type="text" id="codigo-postal" name="codigo_postal" value="{{ user.codigo_postal }}" required>
     
                 <label for="country">País:</label>
                 <select id="country" name="country">
-                    <option value="portugal" >Portugal</option>
+                    <option value="portugal" {% if user.country == 'portugal' %}selected{% endif %}>Portugal</option>
                     <!-- Outras opções de países -->
                 </select>
             </fieldset>
@@ -50,20 +50,20 @@
             <fieldset>
                 <legend>Morada de Faturação</legend>
                 <label for="rua-faturacao">Rua:</label>
-                <input type="text" id="rua-faturacao" name="rua-faturacao" value="" required>
+                <input type="text" id="rua-faturacao" name="rua-faturacao" value="{{ user.rua_faturacao }}" required>
     
                 <label for="numero-faturacao">Porta:</label>
-                <input type="text" id="numero-faturacao" name="numero-faturacao" value="" required>
+                <input type="text" id="numero-faturacao" name="numero-faturacao" value="{{ user.numero_faturacao }}" required>
     
                 <label for="cidade-faturacao">Cidade:</label>
-                <input type="text" id="cidade-faturacao" name="cidade-faturacao" value="" required>
+                <input type="text" id="cidade-faturacao" name="cidade-faturacao" value="{{ user.cidade_faturacao }}" required>
     
                 <label for="codigo-postal-faturacao">Código Postal:</label>
-                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao" value="" required>
+                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao" value="{{ user.codigo_postal_faturacao }}" required>
     
                 <label for="pais-faturacao">País:</label>
                 <select id="pais-faturacao" name="pais-faturacao">
-                    <option value="portugal" >Portugal</option>
+                    <option value="portugal" {% if user.pais_faturacao == 'portugal' %}selected{% endif %}>Portugal</option>
                     <!-- Outras opções de países -->
                 </select>
             </fieldset>

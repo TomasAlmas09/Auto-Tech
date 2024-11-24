@@ -17,8 +17,54 @@
             <label for="confirmar-senha">Confirmar Senha:</label>
             <input type="password" id="confirmar-senha" name="confirmar-senha" required>
 
+            <label for="phone">Telefone:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <fieldset>
+                <legend>Morada</legend>
+                <label for="rua">Rua:</label>
+                <input type="text" id="rua" name="rua" required>
+
+                <label for="numero">Porta:</label>
+                <input type="text" id="numero" name="numero" required>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" required>
+
+                <label for="codigo-postal">Código Postal:</label>
+                <input type="text" id="codigo-postal" name="codigo_postal" required>
+
+                <label for="country">País:</label>
+                <select id="country" name="country">
+                    <option value="portugal">Portugal</option>
+                    <!-- Outras opções de países -->
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Morada de Faturação</legend>
+                <label for="rua-faturacao">Rua:</label>
+                <input type="text" id="rua-faturacao" name="rua-faturacao" required>
+
+                <label for="numero-faturacao">Porta:</label>
+                <input type="text" id="numero-faturacao" name="numero-faturacao" required>
+
+                <label for="cidade-faturacao">Cidade:</label>
+                <input type="text" id="cidade-faturacao" name="cidade-faturacao" required>
+
+                <label for="codigo-postal-faturacao">Código Postal:</label>
+                <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao" required>
+
+                <label for="pais-faturacao">País:</label>
+                <select id="pais-faturacao" name="pais-faturacao">
+                    <option value="portugal">Portugal</option>
+                    <!-- Outras opções de países -->
+                </select>
+            </fieldset>
+
             <button type="submit">Registar</button>
         </form>
+        <p>Já tens uma conta? <a href="{{ url_for('login') }}">Faz login aqui</a>.</p>
     </section>
 </main>
 {% endblock %}

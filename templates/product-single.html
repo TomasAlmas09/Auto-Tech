@@ -16,7 +16,7 @@
                 {% endfor %}
             </div>
 
-            <p><strong>Stock:</strong> {{ produto.estoque }} unidades disponíveis</p>
+            <p><strong>Stock:</strong> {{ produto.stock }} unidades disponíveis</p>
 
             {% if produto.stock < 10 %}
                 <p class="stock-warning">Atenção: Stock baixo!</p>
@@ -24,7 +24,7 @@
             <p><strong>Quantidade:</strong></p>
             <div class="quantity-selector">
                 <button class="decrease">-</button>
-                <input type="number" value="1" min="1" max="{{ produto.estoque }}" id="quantity" class="quantity-input">
+                <input type="number" value="1" min="1" max="{{ produto.stock }}" id="quantity" class="quantity-input">
                 <button class="increase">+</button>
             </div>
 
