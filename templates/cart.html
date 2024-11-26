@@ -10,17 +10,15 @@
                     <th>Produto</th>
                     <th>Quantidade</th>
                     <th>Preço</th>
-                    <th>Subtotal</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in carrinho %}
+                {% for item in cart_items %}
                 <tr>
-                    <td>{{ item.produto }}</td>
-                    <td>{{ item.quantidade }}</td>
-                    <td>{{ item.preco }}€</td>
-                    <td>{{ item.subtotal }}€</td>
+                    <td>{{ item.produto.nome }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.produto.preco }}€</td>
                     <td>
                         <button class="remove-button">Remover</button>
                     </td>

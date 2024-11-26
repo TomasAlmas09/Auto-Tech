@@ -1027,30 +1027,67 @@ main {
 }
 
 
-/* Footer normal, aparece no final da página */
+/* CSS do Footer completo */
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 1em;
+    padding: 2em 1em;
     width: 100%;
     font-size: 0.9em;
+    border-top: 3px solid #4a4a4a;
 }
 
-footer p {
-    margin: 0;
+footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1.5em;
+    margin-bottom: 1.5em;
 }
 
+footer .footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+footer .footer-section h4 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #ccc;
+}
+
+footer .footer-section p,
+footer .footer-section ul {
+    margin: 0.5em 0;
+}
+
+footer .footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .footer-section ul li {
+    margin: 0.3em 0;
+}
+
+footer .footer-section ul li a,
 footer a {
-    color: #DF0101;
+    color: #ccc;
     text-decoration: none;
-    margin-left: 5px;
     transition: color 0.3s ease;
 }
 
+footer .footer-section ul li a:hover,
 footer a:hover {
     color: #fff;
 }
+
+footer .footer-section .social-media a {
+    margin: 0 0.3em;
+}
+
+
 
 /* Trustbar Container */
 .trustbar {
@@ -1111,3 +1148,32 @@ footer a:hover {
     line-height: 1.4; /* Ajuste na altura da linha */
     color: #e0e0e0;
 }
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: #fff;
+    font-size: 2.5em;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-button i {
+    margin: 0;
+}
+

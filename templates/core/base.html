@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Tech - {% block tittle %}{{ name }}{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="shortcut icon" href="{{url_for('static', filename='images/logo_auto-tech_mini.png')}}" type="image/x-icon">
 </head>
+
+<!-- Botão Flutuante do WhatsApp -->
+<a href="https://wa.me/351966666666" target="_blank" class="whatsapp-button" title="Fale conosco pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 {% include 'core/header.html' %}
 

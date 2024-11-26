@@ -5,115 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+from models import *
 
-# Configurações principais
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = os.urandom(24)
-app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Diretório para upload de imagens
-
-# Inicialização de extensões
-db = SQLAlchemy(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
-
-# Modelos de dados
-class Produto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(64), nullable=False)
-    preco = db.Column(db.Float, nullable=False)
-    descricao = db.Column(db.String(255))
-    stock = db.Column(db.Integer, nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
-
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(64), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    senha = db.Column(db.String(128), nullable=False)
-    phone = db.Column(db.String(15), nullable=True)
-    rua = db.Column(db.String(128), nullable=True)
-    numero = db.Column(db.String(10), nullable=True)
-    cidade = db.Column(db.String(64), nullable=True)
-    codigo_postal = db.Column(db.String(10), nullable=True)
-    country = db.Column(db.String(64), nullable=True)
-    rua_faturacao = db.Column(db.String(128), nullable=True)
-    numero_faturacao = db.Column(db.String(10), nullable=True)
-    cidade_faturacao = db.Column(db.String(64), nullable=True)
-    codigo_postal_faturacao = db.Column(db.String(10), nullable=True)
-    pais_faturacao = db.Column(db.String(64), nullable=True)
-    imagem = db.Column(db.String(200), nullable=True)
-
-# Inicialização do banco de dados com dados iniciais
-def init_db():
-    with app.app_context():
-        db.create_all()
-        if Produto.query.count() == 0:
-            produtos_iniciais = [
-                Produto(
-                    nome='Jantes Desportivas', 
-                    preco=300, 
-                    descricao="Conjunto de jantes desportivas de alta performance, fabricadas em liga leve para maior durabilidade e estilo.", 
-                    stock=25, 
-                    rating=4
-                ),
-                Produto(
-                    nome='Spoiler Traseiro', 
-                    preco=150, 
-                    descricao="Spoiler traseiro aerodinâmico que melhora a estabilidade em alta velocidade, adicionando um toque esportivo ao seu veículo.", 
-                    stock=6, 
-                    rating=3
-                ),
-                Produto(
-                    nome='Coilovers', 
-                    preco=400, 
-                    descricao="Sistema de suspensão ajustável que permite customizar a altura e rigidez, ideal para entusiastas de performance.", 
-                    stock=30, 
-                    rating=5
-                ),
-                Produto(
-                    nome='Front Lip', 
-                    preco=100, 
-                    descricao="Acessório de acabamento frontal que melhora o fluxo de ar e confere uma aparência agressiva ao veículo.", 
-                    stock=10, 
-                    rating=2
-                ),
-                Produto(
-                    nome='Grelha Frontal', 
-                    preco=250, 
-                    descricao="Grelha frontal de design exclusivo, fabricada em materiais resistentes para combinar estilo e funcionalidade.", 
-                    stock=50, 
-                    rating=4
-                ),
-            ]
-            db.session.add_all(produtos_iniciais)
-            db.session.commit()
-
-init_db()
-
-# Gerenciar login
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-# Rotas
-@app.route('/')
-def index():
-    produtos = Produto.query.all()
-    return render_template('index.html', name="Produtos Automotivos", produtos=produtos, user=current_user)
-
-@app.route('/produtos/<string:nome>')
-def produto(nome):
-    produto_encontrado = Produto.query.filter_by(nome=nome).first()
-    if not produto_encontrado:
-        return render_template('404.html', name="Produto Não Encontrado"), 404
-    return render_template('product-single.html', produto=produto_encontrado, name=nome)
-
-@app.route('/perfil')
-@login_required
-def perfil():
+def paises():
 
     paises_por_continente = {
         "África": [
@@ -139,17 +33,89 @@ def perfil():
             "Austrália", "Fiji", "Nova Zelândia", "Papua Nova Guiné"
         ]
     }
+    return(paises_por_continente)
 
-    return render_template('profile.html', name="Perfil", user=current_user, paises_por_continente=paises_por_continente)
+# Rotas
+@app.route('/')
+def index():
+    produtos = Produto.query.all()
+    return render_template('index.html', name="Produtos Automotivos", produtos=produtos, user=current_user)
+
+@app.route('/produtos/<string:nome>')
+def produto(nome):
+    produto_encontrado = Produto.query.filter_by(nome=nome).first()
+    if not produto_encontrado:
+        return render_template('404.html', name="Produto Não Encontrado"), 404
+    return render_template('product-single.html', produto=produto_encontrado, name=nome, user=current_user)
+
+@app.route('/perfil')
+@login_required
+def perfil():
+
+    return render_template('profile.html', name="Perfil", user=current_user, paises_por_continente=paises())
 
 @app.route('/carrinho')
 @login_required
 def carrinho():
-    return render_template('cart.html', name="Carrinho", user=current_user)
+    # Obtém os itens do carrinho para o usuário logado
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+
+    # Calcula o total do carrinho
+    total = sum(item.produto.preco * item.quantity for item in cart_items)
+
+    # Renderiza o template com os dados necessários
+    return render_template(
+        'cart.html', 
+        name="Carrinho", 
+        user=current_user, 
+        cart_items=cart_items, 
+        total=total
+    )
+
+@app.route('/add_to_cart', methods=['POST'])
+@login_required
+def add_to_cart():
+    product_id = request.form.get('product_id')
+    quantity = int(request.form.get('quantity', 1))  # Valor padrão de 1, caso o campo não seja enviado corretamente
+
+    # Logando o ID recebido para depuração
+    if not product_id:
+        app.logger.error("Erro ao adicionar ao carrinho: ID do produto não recebido ou inválido.")
+        flash("ID do produto inválido.", "error")
+        return redirect(request.referrer)
+
+    # Consultando o produto pelo ID com Session.get()
+    from sqlalchemy.orm import Session
+    with Session(db.engine) as session:
+        product = session.get(Produto, product_id)
+        if not product:
+            app.logger.error(f"Erro ao adicionar ao carrinho: Produto com ID {product_id} não encontrado.")
+            flash("Produto inválido.", "error")
+            return redirect(request.referrer)
+
+    # Verificando se a quantidade solicitada é válida
+    if quantity > product.stock:
+        flash("Quantidade solicitada excede o estoque disponível.", "error")
+        return redirect(request.referrer)
+
+    # Verificando se o produto já está no carrinho do usuário
+    cart_item = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+    if cart_item:
+        cart_item.quantity += quantity  # Aumenta a quantidade no carrinho
+        flash(f"Quantidade aumentada no carrinho: {cart_item.quantity}.", "success")
+    else:
+        new_cart_item = Cart(user_id=current_user.id, product_id=product_id, quantity=quantity)
+        db.session.add(new_cart_item)
+        flash("Produto adicionado ao carrinho.", "success")
+
+    # Commitando alterações
+    db.session.commit()
+    return redirect(url_for('carrinho'))
+
 
 @app.route('/checkout')
 @login_required
-def checkout():
+def checkout(): 
     return render_template('checkout.html', name="Checkout", user=current_user)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -167,32 +133,6 @@ def login():
 
 @app.route('/registo', methods=['GET', 'POST'])
 def registo():
-
-    paises_por_continente = {
-        "África": [
-            "África do Sul", "Angola", "Argélia", "Cabo Verde", "Egito", 
-            "Marrocos", "Moçambique", "Nigéria", "Tunísia", "Zâmbia"
-        ],
-        "América do Norte": [
-            "Canadá", "Estados Unidos", "México", "Cuba", "Honduras"
-        ],
-        "América do Sul": [
-            "Argentina", "Brasil", "Chile", "Colômbia", "Peru", 
-            "Uruguai", "Venezuela"
-        ],
-        "Ásia": [
-            "Arábia Saudita", "China", "Índia", "Indonésia", "Japão", 
-            "Tailândia", "Turquia", "Vietnã"
-        ],
-        "Europa": [
-            "Alemanha", "Espanha", "França", "Itália", "Portugal", 
-            "Reino Unido", "Rússia", "Suíça"
-        ],
-        "Oceania": [
-            "Austrália", "Fiji", "Nova Zelândia", "Papua Nova Guiné"
-        ]
-    }
-
 
     if request.method == 'POST':
         # Dados do formulário
@@ -248,7 +188,7 @@ def registo():
         flash("Registro bem-sucedido! Faça login.", "success")
         return redirect(url_for('login'))
 
-    return render_template('registry.html', name="Registo", user=current_user, paises_por_continente=paises_por_continente)
+    return render_template('registry.html', name="Registo", user=current_user, paises_por_continente=paises())
 
 @app.route('/logout')
 @login_required

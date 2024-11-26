@@ -7,7 +7,10 @@
             <img src="{{ url_for('static', filename='images/' + produto.nome + '.png') }}" alt="{{ produto.nome }}" class="animated fadeInUp">
         </div>
         <div class="details">
-            <h2 class="product-name animated fadeInUp">{{ produto.nome }}</h2>
+            <h1 class="product-name animated fadeInUp">{{ produto.nome }}</h1>
+
+            <h2><strong>Preço:</strong> {{ produto.preco }}€</h2>
+
             <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
 
             <div class="rating">
@@ -27,9 +30,13 @@
                 <input type="number" value="1" min="1" max="{{ produto.stock }}" id="quantity" class="quantity-input">
                 <button class="increase">+</button>
             </div>
-
-            <button class="add-to-cart animated fadeInUp">Adicionar ao Carrinho</button>
-
+            
+            <form method="POST" action="{{ url_for('add_to_cart') }}">
+                <input type="hidden" name="product_id" value="{{ produto.id }}">
+                <input type="hidden" name="quantity" id="quantity_hidden">
+                <br>
+                <button type="submit">Adicionar ao Carrinho</button>
+            </form>
             
         </div>
     </section>
@@ -42,11 +49,18 @@
     const increaseButton = document.querySelector('.increase');
     const decreaseButton = document.querySelector('.decrease');
     const quantityInput = document.getElementById('quantity');
+    const quantityHidden = document.getElementById('quantity_hidden');
+
+    // Atualiza o campo oculto com a quantidade
+    function updateHiddenQuantity() {
+        quantityHidden.value = quantityInput.value;
+    }
 
     increaseButton.addEventListener('click', () => {
         let currentValue = parseInt(quantityInput.value);
         if (currentValue < parseInt(quantityInput.max)) {
             quantityInput.value = currentValue + 1;
+            updateHiddenQuantity(); // Atualiza o valor oculto
         }
     });
 
@@ -54,7 +68,11 @@
         let currentValue = parseInt(quantityInput.value);
         if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
+            updateHiddenQuantity(); // Atualiza o valor oculto
         }
     });
+
+    // Inicializa o campo oculto com o valor inicial da quantidade
+    updateHiddenQuantity();
 </script>
 {% endblock %}
