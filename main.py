@@ -1,7 +1,28 @@
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
+import os
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'hard to guess string'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(64), unique=True)
+    email = db.Column(db.String(64), unique=True)
+    senha = db.Column(db.String(12))
+
+    def __repr__(self):
+        return f'<User {self.nome}>'
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -16,8 +37,7 @@ class RegistryForm(FlaskForm):
     submit = SubmitField('Registrar')  
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hard to guess string'
+
 
 @app.route('/')
 def index():
@@ -28,23 +48,38 @@ def login():
     name = None
     form = LoginForm()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
+        email = form.email.data
+        password = form.password.data
+
+        user = User.query.filter_by(email=email).first()
+        if user and check_password_hash(user.senha, password):  
+            flash(f'Bem-vindo, {email}', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Email ou senha inválidos', 'error')
+
     return render_template('login.html', form=form, name=name)
 
 @app.route('/registry', methods=['GET', 'POST'])
 def registry():
     form = RegistryForm()
-    
     if form.validate_on_submit():
         nome = form.nome.data
         email = form.email.data
         senha = form.senha.data
         
-        flash(f'Conta criada com sucesso para {nome}!', 'success')
+    user = User.query.filter_by(email=email).first() 
+    if user:
+            flash('Já existe uma conta com este email. Tente um email diferente.', 'erro')
+            return redirect(url_for('registry'))
+
         
-       
-        return render_template('registry.html')
+    new_user = User(nome=nome, email=email, senha=senha)
+    db.session.add(new_user)  
+    db.session.commit()  
+
+    flash(f'Conta criada com sucesso para {nome}!', 'success')
+    return redirect(url_for('login'))
     
     return render_template('registry.html', form=form) 
 

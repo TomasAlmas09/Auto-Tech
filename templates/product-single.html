@@ -1,27 +1,25 @@
-{% extends 'core/base.html' %} {% block title %}Product-Single{% endblock %}
-
-<body>
-  {% block main %}
-  <main>
-    <section class="product-detail">
-      <div class="product-image">
-        <img src="static/images/jantes.webp" alt="Jantes Esportivas" />
-      </div>
-      <div class="details">
-        <h2>Jantes Desportivas</h2>
-        <p>
-          Melhora o visual e a performance do teu carro com nossas jantes
-          desportivas de alta qualidade.
-        </p>
-        <p><strong>Preço:</strong> €400</p>
-        <button class="add-to-cart">Adicionar ao Carrinho</button>
-      </div>
-    </section>
-  </main>
-  {% endblock %}
-</body>
-
-{% block script %}
+{% extends 'core/base.html' %} {% block title %}Product-Single{% endblock %} {%
+block main %}
+<main>
+  <section class="product-detail">
+    <div class="product-image">
+      <img
+        src="{{ url_for('static', filename='images/jantes.webp') }}"
+        alt="Jantes Esportivas"
+      />
+    </div>
+    <div class="details">
+      <h2>Jantes Desportivas</h2>
+      <p>
+        Melhora o visual e a performance do teu carro com nossas jantes
+        desportivas de alta qualidade.
+      </p>
+      <p><strong>Preço:</strong> €400</p>
+      <button class="add-to-cart">Adicionar ao Carrinho</button>
+    </div>
+  </section>
+</main>
+{% endblock %} {% block script %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     let slideIndex = 0;
@@ -46,4 +44,4 @@
     }
   });
 </script>
-{% endblock %} {% include 'core/footer.html' %} {% endblock %}
+{% endblock %} {% include 'core/footer.html' %}
