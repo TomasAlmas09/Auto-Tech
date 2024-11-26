@@ -1,49 +1,47 @@
-{% extends 'core/base.html' %} {% block title %}Cart{% endblock %}
-
-<body>
-  {% block main %}
-  <main>
-    <section class="cart">
-      <h2>Carrinho</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Subtotal</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Jantes Desportivas</td>
-            <td>1</td>
-            <td>400€</td>
-            <td>400€</td>
-            <td>
-              <button class="remove-button">Remover</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Spoiler Traseiro</td>
-            <td>1</td>
-            <td>150€</td>
-            <td>150€</td>
-            <td>
-              <button class="remove-button">Remover</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="total"><strong>Total:</strong> 550€</p>
-      <a href="checkout.html" class="checkout-button">Finalizar Compra</a>
-    </section>
-  </main>
-  {% endblock %}
-</body>
-
-{% block script %}
+{% extends 'core/base.html' %} {% block title %}Carrinho{% endblock %} {% block
+main %}
+<main>
+  <section class="cart">
+    <h2>Carrinho</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Produtos</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Subtotal</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jantes Desportivas</td>
+          <td>1</td>
+          <td>400€</td>
+          <td>400€</td>
+          <td>
+            <button class="remove-button">Remover</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Spoiler Traseiro</td>
+          <td>1</td>
+          <td>150€</td>
+          <td>150€</td>
+          <td>
+            <button class="remove-button">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="total"><strong>Total:</strong> 550€</p>
+    <!-- Corrigido o link de checkout para usar url_for -->
+    <a href="{{ url_for('checkout') }}" class="checkout-button"
+      >Finalizar Compra</a
+    >
+  </section>
+</main>
+{% endblock %} {% block script %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     let slideIndex = 0;
@@ -68,4 +66,4 @@
     }
   });
 </script>
-{% endblock %} {% include 'core/footer.html' %} {% endblock %}
+{% endblock %} {% include 'core/footer.html' %}

@@ -1,18 +1,15 @@
-{% extends 'core/base.html' %} {% block title %}404{% endblock %}
-
-<body>
-  {% block main %}
-  <main>
-    <section class="not-found">
-      <h2>404 - Página Não Encontrada</h2>
-      <p>Desculpa, mas a página que estás procura não foi encontrada.</p>
-      <a href="index.html" class="back-button">Voltar à Página Inicial</a>
-    </section>
-  </main>
-  {% endblock %}
-</body>
-
-{% block script %}
+{% extends 'core/base.html' %} {% block title %}404{% endblock %} {% block main
+%}
+<main>
+  <section class="not-found">
+    <h2>404 - Página Não Encontrada</h2>
+    <p>Desculpa, mas a página que estás procurando não foi encontrada.</p>
+    <a href="{{ url_for('index') }}" class="back-button"
+      >Voltar à Página Inicial</a
+    >
+  </section>
+</main>
+{% endblock %} {% block script %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     let slideIndex = 0;
@@ -21,12 +18,12 @@
     let slideInterval = setInterval(() => moveSlide(1), 5000);
 
     function moveSlide(step) {
-      clearInterval(slideInterval); // Clear interval to stop auto-slide temporarily
+      clearInterval(slideInterval);
       slideIndex += step;
       if (slideIndex < 0) slideIndex = totalSlides - 1;
       else if (slideIndex >= totalSlides) slideIndex = 0;
       updateSlider();
-      slideInterval = setInterval(() => moveSlide(1), 5000); // Restart auto-slide
+      slideInterval = setInterval(() => moveSlide(1), 5000);
     }
 
     function updateSlider() {
@@ -37,4 +34,4 @@
     }
   });
 </script>
-{% endblock %} {% include 'core/footer.html' %} {% endblock %}
+{% endblock %} {% include 'core/footer.html' %}
