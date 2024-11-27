@@ -23,7 +23,7 @@ migrate = Migrate(app, db)
 
 # Modelo de dados para o carrinho de compras
 class Cart(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  o
+    id = db.Column(db.Integer, primary_key=True)  
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
     user = db.relationship('User', backref='cart')  
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))  
@@ -48,7 +48,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)  
     nome = db.Column(db.String(64), unique=True)  
     email = db.Column(db.String(64), unique=True)  
-    senha = db.Column(db.String(128))  
+    senha = db.Column(db.String(128)) 
+    telefone = db.Column(db.String(15))
+    rua = db.Column(db.String(128))
+    numero = db.Column(db.String(10))
+    cidade = db.Column(db.String(64))
+    codigo_postal = db.Column(db.String(15)) 
 
     def __repr__(self):
         return f'<User {self.nome}>'
@@ -77,18 +82,27 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm() 
-    if form.validate_on_submit():  
-        email = form.email.data  
-        password = form.password.data  
-        user = User.query.filter_by(email=email).first() 
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
 
-        if user and check_password_hash(user.senha, password):  
-            session['user_id'] = user.id 
-            flash(f'Bem-vindo, {email}', 'success')  
-            return redirect(url_for('index'))  
-        else:
-            flash('Email ou senha inválidos', 'error')  
+    # Buscando o usuário pelo email no banco de dados
+    user = User.query.filter_by(email=email).first()
+    if user and check_password_hash(user.senha, password):
+            
+            session['user_id'] = user.id
+            session['nome'] = user.nome
+            session['telefone'] = user.telefone
+            session['email'] = user.email
+            session['rua'] = user.rua
+            session['numero'] = user.numero
+            session['cidade'] = user.cidade
+            session['codigo_postal'] = user.codigo_postal
 
+            flash(f'Bem-vindo, {user.nome}!', 'success')
+            return redirect(url_for('profile'))
+    else:
+            flash('Email ou senha inválidos', 'error')
     return render_template('login.html', form=form)  
 
 # Rota para registro de novos usuários
@@ -104,8 +118,9 @@ def registry():
         if user:
             flash('Já existe uma conta com este email. Tente um email diferente.', 'error')  
             return redirect(url_for('registry'))  
-
-        new_user = User(nome=nome, email=email, senha=senha)  
+        
+        # create a new user
+        new_user = User(nome=nome, email=email, senha=senha,telefone='',rua='',numero='',cidade='',codigo_postal='')  
         db.session.add(new_user)  
         db.session.commit()  
 
@@ -117,21 +132,30 @@ def registry():
 # Rota para visualizar um produto específico
 @app.route('/product-single/<int:product_id>')
 def product_single(product_id):
-    product = Product.query.get_or_404(product_id)  
-    return render_template('product-single.html', product=product)  
+    product = Product.query.get_or_404(product_id)
+    return render_template('product-single.html', product=product)
+
 
 # Rota para exibir o perfil do usuário logado
 @app.route('/profile')
 def profile():
     user_id = session.get('user_id') 
+    nome = session.get('nome')
+    telefone = session.get('telefone')
+    email = session.get('email')
+    rua = session.get('rua')
+    numero = session.get('numero')
+    cidade = session.get('cidade')
+    codigo_postal = session.get('codigo-postal')
+
     if not user_id:  
         flash('Você precisa estar logado para acessar o perfil', 'error')  
         return redirect(url_for('login'))  
 
     user = User.query.get(user_id)  
-    return render_template('profile.html', user=user)  
+    return render_template('profile.html',nome=nome,telefone=telefone,email=email,rua=rua,numero=numero,cidade=cidade,codigo_postal=codigo_postal)  
 
-# Rota para exibir o carrinho de compras do usuário logado
+# Rota para exibir o carrinho de compras do user logado
 @app.route('/cart')
 def cart():
     user_id = session.get('user_id')  
@@ -154,4 +178,4 @@ def page_not_found(e):
 
 # Iniciar a aplicação Flask
 if __name__ == "__main__":
-    app.run(debug=True)  
+    app.run(debug=True)
