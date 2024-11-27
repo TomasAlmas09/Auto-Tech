@@ -45,13 +45,13 @@
 
 {% block scripts %}
 <script>
-    // Função para aumentar a quantidade
+    
     const increaseButton = document.querySelector('.increase');
     const decreaseButton = document.querySelector('.decrease');
     const quantityInput = document.getElementById('quantity');
     const quantityHidden = document.getElementById('quantity_hidden');
 
-    // Atualiza o campo oculto com a quantidade
+    
     function updateHiddenQuantity() {
         quantityHidden.value = quantityInput.value;
     }
@@ -60,7 +60,7 @@
         let currentValue = parseInt(quantityInput.value);
         if (currentValue < parseInt(quantityInput.max)) {
             quantityInput.value = currentValue + 1;
-            updateHiddenQuantity(); // Atualiza o valor oculto
+            updateHiddenQuantity();
         }
     });
 
@@ -68,11 +68,11 @@
         let currentValue = parseInt(quantityInput.value);
         if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
-            updateHiddenQuantity(); // Atualiza o valor oculto
+            updateHiddenQuantity();
         }
     });
 
-    // Inicializa o campo oculto com o valor inicial da quantidade
+    
     updateHiddenQuantity();
 </script>
 {% endblock %}

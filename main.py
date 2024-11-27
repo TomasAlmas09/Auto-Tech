@@ -4,10 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
+from sqlalchemy.orm import Session
 
 from models import *
 
-def paises():
+def paises_por_continente():
 
     paises_por_continente = {
         "África": [
@@ -52,18 +53,16 @@ def produto(nome):
 @login_required
 def perfil():
 
-    return render_template('profile.html', name="Perfil", user=current_user, paises_por_continente=paises())
+    return render_template('profile.html', name="Perfil", user=current_user, paises_por_continente=paises_por_continente())
 
 @app.route('/carrinho')
 @login_required
 def carrinho():
-    # Obtém os itens do carrinho para o usuário logado
+   
     cart_items = Cart.query.filter_by(user_id=current_user.id).all()
 
-    # Calcula o total do carrinho
     total = sum(item.produto.preco * item.quantity for item in cart_items)
 
-    # Renderiza o template com os dados necessários
     return render_template(
         'cart.html', 
         name="Carrinho", 
@@ -76,16 +75,13 @@ def carrinho():
 @login_required
 def add_to_cart():
     product_id = request.form.get('product_id')
-    quantity = int(request.form.get('quantity', 1))  # Valor padrão de 1, caso o campo não seja enviado corretamente
+    quantity = int(request.form.get('quantity', 1)) 
 
-    # Logando o ID recebido para depuração
     if not product_id:
         app.logger.error("Erro ao adicionar ao carrinho: ID do produto não recebido ou inválido.")
         flash("ID do produto inválido.", "error")
         return redirect(request.referrer)
 
-    # Consultando o produto pelo ID com Session.get()
-    from sqlalchemy.orm import Session
     with Session(db.engine) as session:
         product = session.get(Produto, product_id)
         if not product:
@@ -93,22 +89,19 @@ def add_to_cart():
             flash("Produto inválido.", "error")
             return redirect(request.referrer)
 
-    # Verificando se a quantidade solicitada é válida
     if quantity > product.stock:
         flash("Quantidade solicitada excede o estoque disponível.", "error")
         return redirect(request.referrer)
 
-    # Verificando se o produto já está no carrinho do usuário
     cart_item = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
     if cart_item:
-        cart_item.quantity += quantity  # Aumenta a quantidade no carrinho
+        cart_item.quantity += quantity
         flash(f"Quantidade aumentada no carrinho: {cart_item.quantity}.", "success")
     else:
         new_cart_item = Cart(user_id=current_user.id, product_id=product_id, quantity=quantity)
         db.session.add(new_cart_item)
         flash("Produto adicionado ao carrinho.", "success")
 
-    # Commitando alterações
     db.session.commit()
     return redirect(url_for('carrinho'))
 
@@ -135,7 +128,7 @@ def login():
 def registo():
 
     if request.method == 'POST':
-        # Dados do formulário
+       
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
@@ -147,13 +140,12 @@ def registo():
         codigo_postal = request.form['codigo_postal']
         country = request.form['country']
         
-        # Processar imagem
         imagem_file = request.files['imagem']
         imagem_nome = secure_filename(imagem_file.filename) if imagem_file else None
+        
         if imagem_file:
             imagem_file.save(os.path.join(app.config['UPLOAD_FOLDER'], imagem_nome))
 
-        # Checar se "mesma-morada" está marcado
         if 'mesma-morada' in request.form:
             rua_faturacao, numero_faturacao = rua, numero
             cidade_faturacao, codigo_postal_faturacao, pais_faturacao = cidade, codigo_postal, country
@@ -164,31 +156,28 @@ def registo():
             codigo_postal_faturacao = request.form['codigo-postal-faturacao']
             pais_faturacao = request.form['pais-faturacao']
 
-        # Validar senha
         if senha != confirmar_senha:
             flash("As senhas não coincidem", "danger")
             return redirect(url_for('registo'))
 
-        # Validar email único
         if User.query.filter_by(email=email).first():
             flash("Email já registrado", "danger")
             return redirect(url_for('registo'))
 
-        # Criar novo usuário
-        novo_usuario = User(
+        novo_utilizador = User(
             nome=nome, email=email, senha=generate_password_hash(senha), phone=phone,
             rua=rua, numero=numero, cidade=cidade, codigo_postal=codigo_postal, country=country,
             rua_faturacao=rua_faturacao, numero_faturacao=numero_faturacao,
             cidade_faturacao=cidade_faturacao, codigo_postal_faturacao=codigo_postal_faturacao,
             pais_faturacao=pais_faturacao, imagem=imagem_nome
         )
-        db.session.add(novo_usuario)
+        db.session.add(novo_utilizador)
         db.session.commit()
 
         flash("Registro bem-sucedido! Faça login.", "success")
         return redirect(url_for('login'))
 
-    return render_template('registry.html', name="Registo", user=current_user, paises_por_continente=paises())
+    return render_template('registry.html', name="Registo", user=current_user, paises_por_continente=paises_por_continente())
 
 @app.route('/logout')
 @login_required
@@ -200,6 +189,5 @@ def logout():
 def page_not_found(error):
     return render_template('404.html', name="Not Found", user=current_user), 404
 
-# Executar o aplicativo
 if __name__ == '__main__':
     app.run(debug=True)
