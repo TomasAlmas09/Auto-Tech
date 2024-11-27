@@ -7,7 +7,7 @@
     <section class="profile">
         <h2>{{ user.nome }}</h2>
         <form method="POST" action="" enctype="multipart/form-data">
-            <!-- Seção de foto de perfil -->
+            <!-- foto de perfil -->
             <div class="profile-pic">
                 <img src="{{ url_for('static', filename='uploads/' + user.imagem) }}" alt="Foto de Perfil" id="profile-img">
                 <label for="upload-photo" class="upload-btn">Alterar Foto</label>
@@ -24,7 +24,7 @@
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="{{ user.email }}" required>
 
-            <!-- Seção de morada -->
+            <!-- morada -->
             <fieldset>
                 <legend>Morada</legend>
                 <label for="rua">Rua:</label>
@@ -57,7 +57,7 @@
             </fieldset>
             
 
-            <!-- Seção de morada de faturação -->
+            <!-- morada de faturação -->
             <fieldset>
                 <legend>Morada de Faturação</legend>
                 <label for="rua-faturacao">Rua:</label>
@@ -87,7 +87,7 @@
                 </select>
             </fieldset>
 
-            <!-- Botão para enviar as atualizações -->
+            
             <button type="submit">Atualizar Perfil</button>
         </form>
     </section>

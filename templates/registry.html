@@ -2,11 +2,11 @@
 
 {% block main %}
 <main>
-    <!-- Seção de registro de usuário -->
+    <!-- registo do utilizador -->
     <section class="register">
         <h2>Registar</h2>
 
-        <!-- Formulário de registro -->
+        
         <form action="{{ url_for('registo') }}" method="POST" enctype="multipart/form-data">
             
             <!-- Campo de Nome -->
@@ -67,13 +67,13 @@
                 </select>
             </fieldset>
 
-            <!-- Checkbox para escolher se a morada de faturação é a mesma -->
+            <!-- escolher se a morada de faturação é a mesma -->
             <label>
                 <input type="checkbox" id="mesma-morada" name="mesma-morada" checked>
                 Usar a mesma morada para faturação
             </label>
 
-            <!-- Seção para morada de faturação -->
+            <!-- morada de faturação -->
             <fieldset id="morada-faturacao" style="display: none;">
                 <legend>Morada de Faturação</legend>
 
@@ -93,10 +93,10 @@
                 <label for="codigo-postal-faturacao">Código Postal:</label>
                 <input type="text" id="codigo-postal-faturacao" name="codigo-postal-faturacao">
 
-                <!-- Campo para selecionar País para faturação -->
+                
                 <label for="pais-faturacao">País:</label>
                 <select id="pais-faturacao" name="pais-faturacao">
-                    <!-- Loop para listar países por continente -->
+                    <!-- listar paises por continente -->
                     {% for continente, paises in paises_por_continente.items() %}
                         <optgroup label="{{ continente }}">
                             {% for pais in paises %}
@@ -107,35 +107,34 @@
                 </select>
             </fieldset>
 
-            <!-- Botão para submeter o formulário -->
+            
             <button type="submit">Registar</button>
         </form>
 
-        <!-- Link para login caso o usuário já tenha conta -->
+      
         <p>Já tens uma conta? <a href="{{ url_for('login') }}">Faz login aqui</a>.</p>
     </section>
 
-    <!-- Script para exibir/ocultar a morada de faturação -->
+   
     <script>
-        // Obter referência ao checkbox e à seção de faturação
+       
         const checkbox = document.getElementById('mesma-morada');
         const faturacaoFieldset = document.getElementById('morada-faturacao');
 
-        // Função para mostrar ou esconder a morada de faturação
+      
         function toggleFaturacaoForm() {
             if (checkbox.checked) {
-                faturacaoFieldset.style.display = 'none'; // Esconder
-                // Limpar os valores do formulário de faturação quando está escondido
+                faturacaoFieldset.style.display = 'none'; 
                 document.querySelectorAll('#morada-faturacao input, #morada-faturacao select').forEach(field => field.value = '');
             } else {
-                faturacaoFieldset.style.display = 'block'; // Mostrar
+                faturacaoFieldset.style.display = 'block';
             }
         }
 
-        // Adiciona evento ao checkbox
+        
         checkbox.addEventListener('change', toggleFaturacaoForm);
 
-        // Inicializa o estado do formulário ao carregar a página
+        
         toggleFaturacaoForm();
     </script>
 </main>

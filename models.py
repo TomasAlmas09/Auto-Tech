@@ -7,21 +7,21 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# Configurações principais
+# Configs principais
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)
-app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Diretório para upload de imagens
+app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Diretório para upload das imagens
 
-# Inicialização de extensões
+#  iniciar extensoes
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-# Modelos de dados
+# Tabelas
 class Produto(db.Model):
-    __tablename__ = 'produtos'  # Define o nome correto da tabela
+    __tablename__ = 'produtos'  
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(64), nullable=False)
     preco = db.Column(db.Float, nullable=False)
@@ -30,7 +30,7 @@ class Produto(db.Model):
     rating = db.Column(db.Integer, nullable=False)
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'  # Define o nome correto da tabela
+    __tablename__ = 'users'  
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -49,18 +49,18 @@ class User(UserMixin, db.Model):
     imagem = db.Column(db.String(200), nullable=True)
 
 class Cart(db.Model):
-    __tablename__ = 'carts'  # Define o nome correto da tabela
+    __tablename__ = 'carts'  
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # Corrigido para referenciar a tabela "users"
-    product_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=True)  # Corrigido para referenciar a tabela "produtos"
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  
+    product_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=True)  
     quantity = db.Column(db.Integer, default=1, nullable=True)
 
-    # Relacionamentos
+    # relacionar tabelas
     user = db.relationship('User', backref='cart_items')
-    produto = db.relationship('Produto', backref='cart_items')  # Corrigido para usar o singular "Produto"
+    produto = db.relationship('Produto', backref='cart_items') 
 
 
-# Inicialização do banco de dados com dados iniciais
+# iniciar a base de dados com os produtos iniciais
 def init_db():
     with app.app_context():
         db.create_all()
