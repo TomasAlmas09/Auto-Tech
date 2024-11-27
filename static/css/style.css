@@ -1,11 +1,11 @@
-/* Reset básico */
+/* Reset inicial */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos gerais */
+/* Estilos padroes */
 body {
     
     margin-top: 69px;
@@ -101,7 +101,7 @@ header nav a:hover {
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: 100%; /* Para garantir que cada slide ocupe 100% da largura */
+    width: 100%;
 }
 
 .slide {
@@ -118,7 +118,7 @@ header nav a:hover {
     object-fit: cover;
 }
 
-/* Content Centering */
+/* Content */
 .content {
     position: absolute;
     top: 50%;
@@ -145,14 +145,14 @@ header nav a:hover {
     line-height: 1.5;
 }
 
-/* Botão */
+/* Botão personalizado */
 .content .btn {
     background-color: #DF0101;
     color: #fff;
     padding: 12px 30px;
     font-size: 1em;
     border-radius: 25px;
-    text-decoration: none;  /* Já está sendo aplicado */
+    text-decoration: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
     display: inline-block;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -162,11 +162,11 @@ header nav a:hover {
 
 .content .btn:hover {
     background-color: #b80000;
-    transform: scale(1.05); /* Aumenta o botão levemente ao passar o mouse */
+    transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Media Queries for Responsiveness */
+/* Responsividade */
 @media (max-width: 768px) {
     .content h2 {
         font-size: 2em;
@@ -197,7 +197,6 @@ header nav a:hover {
     }
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .content h2 {
         font-size: 2.2em;
@@ -214,7 +213,7 @@ header nav a:hover {
 }
 
 
-/* Seção de Login */
+/* Login */
 .login {
     display: flex;
     flex-direction: column;
@@ -263,45 +262,46 @@ header nav a:hover {
     color: orange;
   }
 
-/* Botões */
+/* Estilo dos buttons */
 button {
-    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    background: linear-gradient(135deg, #333, #555);
     color: #fff;
-    padding: 12px 20px; /* Aumentando o padding */
+    padding: 12px 20px;
     border: none;
-    border-radius: 25px; /* Bordas mais arredondadas */
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transições */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
-    background-color: #555; /* Cor ao passar o mouse */
-    transform: translateY(-2px); /* Levanta o botão */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Botões */
+/* Estilo para buttons quando tem <a> */
 .btn {
-    background: linear-gradient(135deg, #333, #555); /* Gradiente */
+    background: linear-gradient(135deg, #333, #555);
     color: #fff;
-    padding: 12px 20px; /* Aumentando o padding */
+    padding: 12px 20px;
     border: none;
-    border-radius: 25px; /* Bordas mais arredondadas */
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transições */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    text-decoration: none;  /* Já está sendo aplicado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
 
 .btn:hover {
-    background-color: #555; /* Cor ao passar o mouse */
-    transform: translateY(-2px); /* Levanta o botão */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* Login */
 
 .login p {
     margin-top: 1em;
@@ -320,7 +320,7 @@ button:hover {
     color: #555;
 }
 
-/* Seção do Carrinho */
+/* Carrinho */
 .cart {
     padding: 2em;
     background-color: #f9f9f9;
@@ -354,7 +354,7 @@ th {
 }
 
 tr:hover {
-    background-color: #f2f2f2; /* Efeito hover na linha */
+    background-color: #f2f2f2;
 }
 
 .total {
@@ -363,7 +363,7 @@ tr:hover {
     margin-top: 1em;
 }
 
-    /* Estilo para as animações */
+    /* Estilo para as animacoes */
     .animated {
         animation-duration: 1s;
         animation-timing-function: ease-out;
@@ -384,21 +384,20 @@ tr:hover {
         }
     }
 
-/* Seção de Produtos */
+/* Produtos */
 .products {
     padding: 3em 1em;
     text-align: center;
     background-color: #f9f9f9;
 }
 
-/* Título da seção de produtos */
 .products h2 {
     font-size: 2em;
     margin-bottom: 0.5em;
     color: #333;
 }
 
-/* Lista de produtos */
+/* Lista dos produtos */
 .product-list {
     display: flex;
     justify-content: space-around;
@@ -406,7 +405,7 @@ tr:hover {
     gap: 1.5em;
 }
 
-/* Estilo de cada produto */
+/* Estilo para cada um dos produto */
 .product {
     background: #fff;
     border: 1px solid #ddd;
@@ -419,13 +418,12 @@ tr:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito de hover sobre o produto */
+
 .product:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Imagem do produto */
 .product img {
     max-width: 100%;
     height: auto;
@@ -433,41 +431,23 @@ tr:hover {
     margin-bottom: 1em;
 }
 
-/* Título do produto (h3) */
 .product h3 {
     font-size: 1.1em;
     margin: 0.5em 0;
     color: #333;
 }
 
-/* Parágrafo de descrição do produto */
 .product p {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 1em;
 }
 
-/* Garantindo que textos não fiquem com estilo de link */
 .product h3, .product p {
-    text-decoration: none;  /* Remover sublinhado */
-    color: inherit;         /* Garantir que herdem a cor do elemento pai */
+    text-decoration: none;  
+    color: inherit;        
 }
 
-/* Seção de Produtos */
-.products {
-    padding: 3em 1em;
-    text-align: center;
-    background-color: #f9f9f9;
-}
-
-/* Título da seção de produtos */
-.products h2 {
-    font-size: 2em;
-    margin-bottom: 0.5em;
-    color: #333;
-}
-
-/* Lista de produtos */
 .product-list {
     display: flex;
     justify-content: space-around;
@@ -525,7 +505,7 @@ tr:hover {
 /* Caso exista algum link dentro do produto (por exemplo, em 'a') */
 .product a {
     text-decoration: none;  /* Remover sublinhado dos links */
-    color: inherit;    /* Garantir que a cor dos links seja a mesma que o texto */
+    color: inherit;    
 }
 
 .product .btn {
